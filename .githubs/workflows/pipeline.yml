@@ -1,0 +1,19 @@
+name: My CICD workflow
+
+on: push
+
+jobs:
+  shali_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Testing Message
+      run: echo ""Testing Pipeline action"
+
+    - name: List files
+      run: ls
+
+    - name: Read file
+      run: cat READme.md
