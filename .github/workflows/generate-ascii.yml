@@ -1,19 +1,35 @@
-name: Generate ASCII Artwork
+name: My CICD workflow
 
 on: push
 
 jobs:
-  shali_job:
+  build_job:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout Repo
-      uses: actions/checkout@v4
+    - name: Install Cowsay Program
+      run: sudo apt-get install cowsay -y
 
-    - name: List files
-      run: ls -ltra
-    
-    - name: Executing Shell Scripts
-      run: |
-        chmod +x ascii-script.sh
-        ./ascii-script.sh
-      
+    - name: Execute Cowsay CMD
+      run: cowsay -f dragon "Run for cover, I am a DRAGIN....RAWR" >> dragon.txt
+
+    - name: Sleep fpr 30seconds
+      run: sleep 30
+
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep fro 10 seconds
+      uses: sleep 10
+
+    - name: Testing File Exists
+      run: grep -i "dragon" dragon.txt
+
+
+  deploy_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Read File
+      uses: cat dragon.txt
+
+    - name: Deploy
+      run: echo Deploying ... .. .
